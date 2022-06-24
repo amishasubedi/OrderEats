@@ -12,4 +12,4 @@ const Meals = () => {
   );
 };
 
-export default MealsSummary;
+export default Meals;
