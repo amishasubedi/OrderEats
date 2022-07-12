@@ -10,6 +10,13 @@
   align-items: center;
   border-radius: 25px;
   font-weight: bold;
+  position: absolute;
+  width: 270px;
+  height: 50px;
+  left: 1600px;
+  top: 17px;
+
+  border-radius: 35px;
 }
 
 .button:hover,
@@ -27,7 +34,7 @@
   background-color: #b94517;
   padding: 0.25rem 1rem;
   border-radius: 25px;
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   font-weight: bold;
 }
 
