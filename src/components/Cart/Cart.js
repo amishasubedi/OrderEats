@@ -11,7 +11,6 @@ const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
@@ -20,6 +19,20 @@ const Cart = (props) => {
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem(item);
+  };
+
+  const orderHandler = () => {
+    setIsCheckout(true);
+  };
+
+  const submitOrderHandler = (userData) => {
+    fetch("https://react-http-6b4a6.firebaseio.com/orders.json", {
+      method: "POST",
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: cartCtx.items,
+      }),
+    });
   };
 
   const cartItems = (
@@ -37,22 +50,7 @@ const Cart = (props) => {
     </ul>
   );
 
-  const orderHandler = () => {
-    setIsCheckout(true);
-  };
-
-  const submitOrderHandler = (userData) => {
-    fetch("https://to-do-list-67ef1-default-rtdb.firebaseio.com/orders.json", {
-      method: "POST",
-      body: JSON.stringify({
-        user: userData,
-        orderItems: cartCtx.items,
-      }),
-    });
-  };
-
-  // when user is checking out, hide this function
-  const ModalActions = (
+  const modalActions = (
     <div className={classes.actions}>
       <button className={classes["button--alt"]} onClick={props.onClose}>
         Close
@@ -75,8 +73,7 @@ const Cart = (props) => {
       {isCheckout && (
         <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
       )}
-
-      {!isCheckout && ModalActions}
+      {!isCheckout && modalActions}
     </Modal>
   );
 };
