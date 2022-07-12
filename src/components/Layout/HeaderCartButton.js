@@ -14,7 +14,6 @@ const HeaderCartButton = (props) => {
     return curNumber + item.amount;
   }, 0);
 
-  // animation for your cart button
   const btnClasses = `${classes.button} ${
     btnIsHighlighted ? classes.bump : ""
   }`;
@@ -25,7 +24,6 @@ const HeaderCartButton = (props) => {
     }
     setBtnIsHighlighted(true);
 
-    // cleans up timer
     const timer = setTimeout(() => {
       setBtnIsHighlighted(false);
     }, 300);
