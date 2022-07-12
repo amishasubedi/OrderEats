@@ -8,36 +8,35 @@ const HeaderCartButton = (props) => {
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
+  const { items } = cartCtx;
+
+  const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
 
-  const { items } = cartCtx;
-
-  // animation for Add to cart button
-  const btnClasses = `${classes.button}  ${
+  // animation for your cart button
+  const btnClasses = `${classes.button} ${
     btnIsHighlighted ? classes.bump : ""
   }`;
 
   useEffect(() => {
-    if (cartCtx.items.length === 0) {
+    if (items.length === 0) {
       return;
     }
-
     setBtnIsHighlighted(true);
 
+    // cleans up timer
     const timer = setTimeout(() => {
-      btnIsHighlighted(false);
+      setBtnIsHighlighted(false);
     }, 300);
 
-    // clean up timers
     return () => {
       clearTimeout(timer);
     };
   }, [items]);
 
   return (
-    <button className={classes.button} onClick={props.onClick}>
+    <button className={btnClasses} onClick={props.onClick}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
