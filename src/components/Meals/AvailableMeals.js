@@ -13,7 +13,8 @@ const AvailableMeals = () => {
     const fetchMeals = async () => {
       const response = await fetch(
         // send request to fetch meals
-        "https://to-do-list-67ef1-default-rtdb.firebaseio.com/meals.json"
+        "https://meals2go-cd811-default-rtdb.firebaseio.com//meals.json"
+        
       );
 
       if (!response.ok) {
